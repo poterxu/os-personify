@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys
 import os
-#print sys.argv[0]
 enable_str = 'enable'
 disable_str = 'disable'
 auto_mode_cmd ='gsettings set org.gnome.system.proxy mode \'auto\''
@@ -23,5 +22,3 @@ elif sys.argv[1] == disable_str:
 else:
     print 'Wrong option, do nothing'
 
-#os.system('gsettings set org.gnome.system.proxy mode 'auto'')
-#os.system('gsettings set org.gnome.system.proxy autoconfig-url http://xduotai.com/xTUKZ9fObNA.pac')
