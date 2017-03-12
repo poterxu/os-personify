@@ -9,6 +9,9 @@ none_mode_cmd ='gsettings set org.gnome.system.proxy mode \'none\''
 
 pac_url_cmd = 'gsettings set org.gnome.system.proxy autoconfig-url http://xduotai.com/xTUKZ9fObNA.pac'
 
+if len(sys.argv) <=  1:
+    print 'no option'
+    quit()
 
 if sys.argv[1] == enable_str:
     os.system(auto_mode_cmd)
