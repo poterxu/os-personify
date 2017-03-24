@@ -23,6 +23,7 @@ __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 
 import pprint
 import httplib2
+import webbrowser
 from googleapiclient.discovery import build
 #def http_test(url):
 #    connect=httplib2.Http(".cache")
@@ -36,7 +37,11 @@ def main():
     p = httplib2.ProxyInfo(httplib2.socks.PROXY_TYPE_HTTP, 'http://duotai:xTUKZ9fObNA@rosewood.h.xduotai.com', 21693)
     connect = httplib2.Http()
     content = connect.request("http://www.sina.com.cn")[1]
-    print (content.decode('utf-8'))
+    html = content.decode('utf-8')
+    f = open('content.html', 'w')
+    f.write(content)
+    f.close()
+    webbrowser.open_new_tab('content.html')
     quit()
     # Build a service object for interacting with the API. Visit
     # the Google APIs Console <http://code.google.com/apis/console>
