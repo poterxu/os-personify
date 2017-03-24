@@ -27,14 +27,14 @@ search_item=sys.argv[1]
 book_list=[]
 real_book_list=[]
 book_name_with_author_list=[]
-for root,dirs,files in os.walk("/home/poter/Dropbox/book"):
+for root,dirs,files in os.walk("/home/poter/Dropbox"):
     for name in dirs:
         book_path =(os.path.join(root,name))
-        book_list+=glob.glob(book_path+'/*.pdf')
-        book_list+=glob.glob(book_path+'/*.epub')
-        book_list+=glob.glob(book_path+'/*.txt')
-        book_list+=glob.glob(book_path+'/*.djvu')
-        book_list+=glob.glob(book_path+'/*.chm')
+        book_list+=glob.glob(book_path+'/*.png')
+        book_list+=glob.glob(book_path+'/*.jpg')
+        book_list+=glob.glob(book_path+'/*.pnm')
+        book_list+=glob.glob(book_path+'/*.gif')
+        book_list+=glob.glob(book_path+'/*.svg')
 
 for i in range(0, len(book_list)-1):
     book_name =book_list[i]
@@ -45,7 +45,7 @@ for i in range(0, len(real_book_list)-1):
     book_name_with_author_list.append( book_name_with_author[len(book_name_with_author)-2])
 #book_name_with_author_list.sort()
 for i in range(0, len(book_name_with_author_list)-1):
-    if search_item in book_name_with_author_list[i]:
+   # if search_item in book_name_with_author_list[i]:
         print book_name_with_author_list[i]
         print book_list[i]
     
