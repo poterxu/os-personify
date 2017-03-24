@@ -24,6 +24,7 @@ __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 import pprint
 import httplib2
 import webbrowser
+import matplotlib.pyplot as plt
 from googleapiclient.discovery import build
 #def http_test(url):
 #    connect=httplib2.Http(".cache")
@@ -38,6 +39,15 @@ def main():
     connect = httplib2.Http()
     content = connect.request("http://www.sina.com.cn")[1]
     html = content.decode('utf-8')
+    labels = 'beijing','shanghai','shenzhen','wuhan'
+    sizes = [215, 130, 245, 210]
+    colors=['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+    explode=(0.1, 0,0,0)
+    plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+            autopct='%1.1f%%', shadow=True, startangle=140)
+    plt.axis('equal')
+    plt.show()
+    quit()
     f = open('content.html', 'w')
     f.write(content)
     f.close()
