@@ -14,7 +14,7 @@ if True == os.path.isdir(setup_des):
 else:
     os.system('mkdir '+ setup_des)
 #System Proxy setup
-os.system('cp ./proxy-switch.py ' +setup_des+'/')
+os.system('cp ./switch-proxy.py ' +setup_des+'/')
 bashrc_backup = 'cp '+ home_dir+'/.bashrc'
 #VIM setup & Config
 

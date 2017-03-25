@@ -5,7 +5,8 @@ enable_str = 'enable'
 disable_str = 'disable'
 auto_mode_cmd ='gsettings set org.gnome.system.proxy mode \'auto\''
 none_mode_cmd ='gsettings set org.gnome.system.proxy mode \'none\''
-
+duotai_pac_url= 'http://xduotai.com/xTUKZ9fObNA.pac'
+lantern_pac_url=''
 pac_url_cmd = 'gsettings set org.gnome.system.proxy autoconfig-url http://xduotai.com/xTUKZ9fObNA.pac'
 
 if len(sys.argv) <=  1:
