@@ -8,43 +8,20 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from douban_client import DoubanClient
 from colorconsole import terminal
-from termcolor import cprint
-from colorama import init
-from pyfiglet import figlet_format
-
+import dropbox.client
+app_key='1qp8zxvkvzgowj0'
+app_secret='i5ajtsv0z7laip3'
+flow = dropbox.client.DropboxOAuth2FlowNoRedirect(app_key, app_secret)
+authorize_url = flow.start()
+print '1. Go to: ' + authorize_url
+print '2. Click "Allow" (you might have to log in first)'
+print '3. Copy the authorization code.'
+code = raw_input("Enter the authorization code here: ").strip()
+quit()
 screen=terminal.get_terminal(conEmu=False)
-def ascii_art_print(string):
-    cprint(figlet_format(string,font="starwars"),'yellow',
-            'on_red',attrs=['bold'])
-
 def get_pdf_line(pdf_file,page):
     for line in pdf_file.getPage(page).extractText().splitlines():
         yield line
-
-def pdf_book_search(path):
-    pdf_file=open(path, 'rb')
-    read_pdf=PyPDF2.PdfFileReader(pdf_file)
-    for pageNumber in range(0, read_pdf.getNumPages()):
-        i=-1
-        for line in get_pdf_line(read_pdf,pageNumber):
-            i+=1
-            if search_item in line:
-                output= "Page"+str(pageNumber)+",Line"+str(i)+":"+ line+'\n'
-                #ascii_art_print('continue')
-                if i%2 == 0:
-                    screen.cprint(4,0,output)
-                else:
-                    screen.cprint(10,1,output)
-                    screen.reset_colors()
-def chm_book_search(path):
-    print "To do"
-
-def txt_book_search(path):
-    print "To do"
-ascii_art_print('book search')
-if len(sys.argv) <= 1:
-    print "No searh item"
-    quit()
 search_item=sys.argv[1]
 book_list=[]
 real_book_list=[]
@@ -77,36 +54,34 @@ if len(result_list) < 1:
 for i in range(0, len(result_list)):
     print '['+str(i)+']:'+result_list[i]
 
-number_ascii=['0','1','2','3','4','5','6','7','8','9']
+#print "open?"
 while 1:
     option=raw_input('open?')
     if option == 'q':
         quit()
-    if option[0] not in number_ascii:
-        print "Invalid index"
-        continue
-    index=int(option)
-    print len(result_list)
-    if index >= len(result_list):
-        print "index out of range"
-    else:
-        break
-file_full_path=result_file_location[index]
-full_path_splited=file_full_path.split('.')
-book_type=full_path_splited[len(full_path_splited)-1]
+        index=int(option)
+        print len(result_list)
+        if index >= len(result_list):
+            print "index out of range"
+        else:
+            break
 
 search_item=raw_input('search in book?')
-
 if search_item=='q':
     quit()
-ascii_art_print(book_type)
-if book_type=='pdf':
-    print "book type pdf"
-    pdf_book_search(result_file_location[index])
-elif book_type=='chm':
-    chm_book_search(result_file_location[index])
-elif book_type=='txt':
-    txt_book_search(result_file_location[index])
-else:
-    print "unknown book type"
+
+pdf_file=open(result_file_location[index], 'rb')
+read_pdf=PyPDF2.PdfFileReader(pdf_file)
+i=-1
+for pageNumber in range(0, read_pdf.getNumPages()):
+    i=-1
+    for line in get_pdf_line(read_pdf,pageNumber):
+        i+=1
+        if search_item in line:
+            output= "Page"+str(pageNumber)+",Line"+str(i)+":"+ line+'\n'
+            if i%2 == 0:
+                screen.cprint(4,0,output)
+            else:
+                screen.cprint(10,1,output)
+                screen.reset_colors()
 
