@@ -1,0 +1,1 @@
+When add front camera scale mode, it use same resolution with snapshot, but use chromatix parameters based on preview, then there's problem for AEC, now, set scale mode res same with preview

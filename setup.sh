@@ -8,11 +8,12 @@ program_list=("rar" \
        	"git" \
 	"cscope" \
 	"figlet" \
+	"emacs" \
 	"vim")
 
 for i in "${program_list[@]}"
 do
-	program_install $i
+	program_install $i; echo $i
 done
 figlet "os personify..."
 ./setup.py
